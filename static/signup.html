@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="responsive.css">
+	<script src="https://kit.fontawesome.com/a38d22bf1c.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="oneMoreStyle.css">
+	<link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <nav>
+
+		<div class="container main-nav flex">
+			<a href="/" class="company-logo">
+				<img src="images/ggits.jpeg">
+			</a>
+			<div class="nav-links " id="nav-links">
+				<ul class="flex">
+					<li><a href="/" class="hover-links">Home</a></li>
+					<li><a href="#" class="hover-links">Resources</a></li>
+					<li><a href="#" class="hover-links">Projects</a></li>
+					<li><a href="#" class="hover-links">Contact</a></li>
+					<li><a href="/login" class="hover-links secondary-btn">Sign In</a></li>
+					<li><a href="/signup" class="hover-links primary-btn">Sign Up</a></li>
+				</ul>
+			</div>
+			<a href="#" id="nav-toggle" class="nav-toggle hover-links"><i class="fa-solid fa-bars"></i></a>
+		</div>
+	</nav>
+
+
+	<div class="form-signup">
+		<section>
+			<div id="signup">
+                <label for="name">Roll Number</label>
+                <input type="text" id="rnumb" required>
+                <label for="name">Full Name</label>
+                <input type="text" id="fnameinp" required>
+                <label for="name">Username</label>
+                <input type="text" id="userninp" required>
+				<label for="email">Email</label>
+				<input type="email" name="email" id="emailinp" required>
+				<label for="password">Password</label>
+                <input type="password" name="password" id="passinp1" required>
+				<label for="cpassword">Confirm Password</label>
+				<input type="password" name="cpassword" id="passinp2" required>
+				<button id="signupbtn">Signup</button>
+            </div>
+		</section>
+	</div>
+
+</body>
+
+<script>
+    let rnumb = document.getElementById('rnumb')
+    let emailinp = document.getElementById('emailinp')
+    let userninp = document.getElementById('userninp')
+    let fnameinp = document.getElementById('fnameinp')
+    let passinp1 = document.getElementById('passinp1')
+    let passinp2 = document.getElementById('passinp2')
+    let signupbtn = document.getElementById('signupbtn')
+    
+    signupbtn.addEventListener("click", async() => {
+        if(emailinp.value!="" && userninp.value!="" && fnameinp.value!="" && passinp1.value!="" && passinp2.value!=""){
+            if(passinp1.value == passinp2.value){
+                let signup = await fetch('/signupreq', {
+                    'method': 'POST',
+                    'headers': {
+                        'Content-Type': 'application/json'
+                    },
+                    'body': JSON.stringify({
+                        'rolln': rnumb.value,
+                        'email': emailinp.value,
+                        'username': userninp.value,
+                        'fullname': fnameinp.value,
+                        'password': passinp1.value
+                    })
+                })
+                let signupjs = await signup.json()
+                if(signupjs.signup == "successful"){
+                    if(confirm("You have Successful Signed Up\nWould you like to Continue to the Login Page")){
+                        window.location.href = window.location.origin + '/login'
+                    }
+                    else{
+                        window.location.href = window.location.origin + '/signup'
+                    }
+                }else{
+                    alert("Signup Couldn't be Completed")
+                }
+            }else{
+                alert("The Entered Passwords do not match\nRe-Enter the Passwords")
+                passinp1.value = ""
+                passinp2.value = ""
+            }
+        }else{
+            alert("You can't Leave any of the Fields Empty")
+        }
+    })
+    
+</script>
+
+</html>

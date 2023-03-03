@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <script src="https://kit.fontawesome.com/a38d22bf1c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="oneMoreStyle.css">
+    <link rel="stylesheet" href="posts.css">
+</head>
+<body>
+    <nav>
+		<div class="container main-nav flex">
+			<a href="/" class="company-logo">
+				<img src="images/ggits.jpeg">
+			</a>
+			<div class="nav-links " id="nav-links">
+				<ul class="flex">
+					<li><a href="/" class="hover-links">Home</a></li>
+					<li><a href="#" class="hover-links">Resources</a></li>
+					<li><a href="#" class="hover-links">Projects</a></li>
+					<li><a href="#" class="hover-links">Contact</a></li>
+				</ul>
+			</div>
+			<a href="#" id="nav-toggle" class="nav-toggle hover-links"><i class="fa-solid fa-bars"></i></a>
+		</div>
+	</nav>
+
+    <div id="content">
+
+    </div>
+</body>
+
+<script>
+    let cont = document.getElementById('content')
+    window.addEventListener('load', () => {
+        let postdata = JSON.parse(sessionStorage.getItem('postdata'))
+        for(let i=0; i<postdata.length; i++){
+            let div = document.createElement('div')
+            div.classList.add('post-whole')
+            let posterInfo = document.createElement('div')
+            posterInfo.classList.add('poster-info')
+            posterInfo.innerHTML = `<span>${postdata[i].rollno}</span><span>|</span><span>${postdata[i].fname}</span>`
+            div.appendChild(posterInfo)
+            let postInfo = document.createElement('div')
+            postInfo.classList.add('post-info')
+            postInfo.innerHTML = `<span>${postdata[i].headline}</span><span>|</span><span>${postdata[i].subject}</span>`
+            div.appendChild(postInfo)
+            let tagInfo = document.createElement('div')
+            tagInfo.classList.add('tag-info')
+            for(let t=0; t< postdata[i].tags.length; t++){
+                let tagt = document.createElement('span')
+                tagt.innerText = postdata[i].tags[t]
+                tagInfo.appendChild(tagt)
+            }
+            div.appendChild(tagInfo)
+            let postContent = document.createElement('div')
+            postContent.classList.add('post-content')
+            postContent.innerText = postdata[i].content
+            div.appendChild(postContent)
+            
+        cont.appendChild(div)
+        }
+        for(let i=0; i<postdata.length; i++){
+            let div = document.createElement('div')
+            div.classList.add('post-whole')
+            let posterInfo = document.createElement('div')
+            posterInfo.classList.add('poster-info')
+            posterInfo.innerHTML = `<span>${postdata[i].rollno}</span><span>|</span><span>${postdata[i].fname}</span>`
+            div.appendChild(posterInfo)
+            let postInfo = document.createElement('div')
+            postInfo.classList.add('post-info')
+            postInfo.innerHTML = `<span>${postdata[i].headline}</span><span>|</span><span>${postdata[i].subject}</span>`
+            div.appendChild(postInfo)
+            let tagInfo = document.createElement('div')
+            tagInfo.classList.add('tag-info')
+            for(let t=0; t< postdata[i].tags.length; t++){
+                let tagt = document.createElement('span')
+                tagt.innerText = postdata[i].tags[t]
+                tagInfo.appendChild(tagt)
+            }
+            div.appendChild(tagInfo)
+            let postContent = document.createElement('div')
+            postContent.classList.add('post-content')
+            postContent.innerText = postdata[i].content
+            div.appendChild(postContent)
+            
+        cont.appendChild(div)
+        }
+        for(let i=0; i<postdata.length; i++){
+            let div = document.createElement('div')
+            div.classList.add('post-whole')
+            let posterInfo = document.createElement('div')
+            posterInfo.classList.add('poster-info')
+            posterInfo.innerHTML = `<span>${postdata[i].rollno}</span><span>|</span><span>${postdata[i].fname}</span>`
+            div.appendChild(posterInfo)
+            let postInfo = document.createElement('div')
+            postInfo.classList.add('post-info')
+            postInfo.innerHTML = `<span>${postdata[i].headline}</span><span>|</span><span>${postdata[i].subject}</span>`
+            div.appendChild(postInfo)
+            let tagInfo = document.createElement('div')
+            tagInfo.classList.add('tag-info')
+            for(let t=0; t< postdata[i].tags.length; t++){
+                let tagt = document.createElement('span')
+                tagt.innerText = postdata[i].tags[t]
+                tagInfo.appendChild(tagt)
+            }
+            div.appendChild(tagInfo)
+            let postContent = document.createElement('div')
+            postContent.classList.add('post-content')
+            postContent.innerText = postdata[i].content
+            div.appendChild(postContent)
+            
+        cont.appendChild(div)
+        }
+    })
+    
+</script>
+
+</html>

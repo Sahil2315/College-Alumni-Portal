@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <script src="https://kit.fontawesome.com/a38d22bf1c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="oneMoreStyle.css">
+    <link rel="stylesheet" href="posts.css">
+</head>
+
+<body>
+    
+    <nav>
+		<div class="container main-nav flex">
+			<a href="/" class="company-logo">
+				<img src="images/ggits.jpeg">
+			</a>
+			<div class="nav-links " id="nav-links">
+				<ul class="flex">
+					<li><a href="/" class="hover-links">Home</a></li>
+					<li><a href="#" class="hover-links">Resources</a></li>
+					<li><a href="#" class="hover-links">Projects</a></li>
+					<li><a href="#" class="hover-links">Contact</a></li>
+                    <li><button id="viewposts">View Posts</button></li>
+				</ul>
+			</div>
+			<a href="#" id="nav-toggle" class="nav-toggle hover-links"><i class="fa-solid fa-bars"></i></a>
+		</div>
+	</nav>
+
+    <div id="create-post">
+        <input type="text" id="headline" placeholder="Headline">
+        <input type="text" id="subject" placeholder="Subject">
+        <input type="text" id="tags" placeholder="Tags">
+        <textarea type="text" id="content" placeholder="Text"></textarea>
+        <button id="postbtn">Post</button>
+    </div>
+</body>
+
+<script>
+    let headline = document.getElementById('headline')
+    let subject = document.getElementById('subject')
+    let tags = document.getElementById('tags')
+    let content = document.getElementById('content')
+    let postbtn = document.getElementById('postbtn')
+
+    postbtn.addEventListener('click', async() => {
+        if(headline.value!="" && subject.value!="" && tags.value!="" && content.value!=""){
+            let taglist = tags.value.replace(" ", "").split(',')
+            let postpost = await fetch('/insertpost', {
+                'method': 'POST',
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'body': JSON.stringify({
+                    'headline': headline.value,
+                    'subject': subject.value,
+                    'tags': taglist,
+                    'content': content.value
+                })
+            })
+            let postjs = await postpost.json()
+            if(postjs.post == 'successful'){
+                alert("Your Post was Posted Successfully")
+            }
+            else{
+                alert("Post Unsuccessful")
+            }
+        }
+    })
+
+    let viewposts = document.getElementById('viewposts')
+    viewposts.addEventListener('click', async() => {
+        let getposts = await fetch('/postget', {
+            'method': 'GET', 'headers': {'Content-Type': 'application/json'},
+        })
+        let getjs = await getposts.json()
+        if(getjs.posts == 'none'){
+            alert("There is nothing Posted yet")
+        }
+        else{
+            sessionStorage.setItem('postdata', JSON.stringify(getjs.posts))
+            window.location.href = window.location.origin + '/posted'
+        }
+    })
+
+</script>
+
+</html>

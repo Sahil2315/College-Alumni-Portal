@@ -1,0 +1,58 @@
+.getEngaged {
+    width: 100%;
+    height: 70vh;
+    margin-left:5vw ;
+}
+
+.getEngaged h1 {
+    font-size: 2em;
+    margin-left: 5vw;
+}
+
+.engage_card {
+    width: 100%;
+    height: 86%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.engage_left {
+    width: 50%;
+    height: 86%;
+    margin-left: 5%;
+}
+
+.engage_right {
+    width: 50%;
+    height: 86%;
+}
+
+.engage1 {
+    width: 90%;
+    height: 12vh;
+    /* border: 1px solid red; */
+    margin-top: 2vh;
+    display: flex;
+}
+
+.engage1 .img img {
+    vertical-align: middle;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.content {
+    margin-left: 2vw;
+}
+
+.content h2 {
+    font-size: 1.5em;
+}
+
+.content p {
+    font-size: 1.2em;
+}
+
+
